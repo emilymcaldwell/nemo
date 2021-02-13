@@ -32,7 +32,6 @@
 <meta name="color:Posts" content="#F5F5F5" />
 <meta name="color:Borders" content="#EEEEEE" />
 
-<meta name="if:Clock" content="" />
 <meta name="if:Sidebar" content="" />
 
 <meta name="text:Title" content="" />
@@ -838,28 +837,6 @@ footer a {
 
 <script type="text/javascript" src="https://static.tumblr.com/i5s2zks/9Acok8oo2/bct-timeago.min.js"></script>
 <script>
-{block:ifClock}
-(function() {
-    var clock = document.querySelector('#blogtitle');
-    var pad = function(x) {
-        return x < 10 ? '0' + x : x;
-    };
-    var currentTime = function() {
-        var d = new Date();
-
-        var h = pad(d.getHours());
-        var m = pad(d.getMinutes());
-        var s = pad(d.getSeconds());
-
-        var time = [h, m, s].join(':');
-
-        clock.innerHTML = time;
-    };
-    currentTime();
-    setInterval(currentTime, 1000);
-}());
-{/block:ifClock}
-
 $('section').find('.notecount').each(function(){
    var n = $(this).html().split(' ')[0].replace(/,/g, '');
    if (n > 999) {
