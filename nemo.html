@@ -34,6 +34,7 @@
 <meta name="color:Borders" content="#EEEEEE" />
 
 <meta name="if:Sidebar" content="" />
+<meta name="if:Hide Caption Icons" content="" />
 
 <meta name="text:Title" content="" />
 <meta name="text:Description" content="" />
@@ -46,6 +47,10 @@
 <meta name="text:Sidebar Margin" content="150px" />
 <meta name="text:Margin" content="200px" />
 <meta name="text:Photoset Gutter" content="2px" />
+
+<meta name="text:Home Link" content="home" />
+<meta name="text:Ask Link" content="contact" />
+<meta name="text:Archive Link" content="archive" />
 
 <meta name="text:Link 1 URL" content=""/>
 <meta name="text:Link 1" content=""/>
@@ -439,7 +444,9 @@ nav span {
 .caption { list-style-type:none;margin:20px 0 0; }
 .comment a { border-bottom:1px solid {color:accent}; }
 .user-icon {
+    {block:ifHideCaptionIcons}
     display:none;
+    {/block:ifHideCaptionIcons}
     vertical-align:middle;
     margin-right:8px;
     border-radius:50%;
@@ -626,9 +633,9 @@ footer a {
     <div id="description">{text:Description}</div>
     {/block:ifDescription}
     <nav>
-    <span><a href="/">home</a></span>
-    <span><a href="/ask">contact</a></span>
-    <span><a href="/archive">archive</a></span>
+    <span><a href="/">{text:home link}</a></span>
+    <span><a href="/ask">{text:ask link}</a></span>
+    <span><a href="/archive">{text:archive link}</a></span>
     {block:HasPages}{block:Pages}<span><a href="{URL}">{Label}</a></span>{/block:Pages}{/block:HasPages}
     {block:ifLink1}<span><a href="{text:Link 1 URL}">{text:Link 1}</a></span>{/block:ifLink1}
     {block:ifLink2}<span><a href="{text:Link 2 URL}">{text:Link 2}</a></span>{/block:ifLink2}
