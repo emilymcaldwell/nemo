@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 
-<!------------------------------------------------------
+<!--------------------------------------------------------------------
 
      nemo @ wordbite
     
@@ -11,11 +11,11 @@
     - style my tooltips by malihu
     - npf photoset fix by glenthemes
     - timeAgo(); plugin by bychloethemes
-    - notecount shortener by shythemes
+    - notecount shortener & minimal soundcloud player by shythemes
     - smoothscroll by balazs galambosi
     - outicons by anton saputro
     
--------------------------------------------------------->
+---------------------------------------------------------------------->
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,7 +63,6 @@
 <link href="https://fonts.googleapis.com/css?family={text:Google Font}:700,600,500,400|Karla" rel="stylesheet">
 
 <!-- photosets -->
-
 <link href="https://static.tumblr.com/0podkko/oDSpg7y88/photosets.css" rel="stylesheet">
 
 <!-- scripts -->
@@ -263,19 +262,7 @@ hr {
 ul {max-width: 100%; list-style-type: circle; margin-left:-20px; }
 ol {max-width: 100%; list-style-type: decimal-leading-zero; margin-left:-20px; }
 
-/* body */
-
-.ph {
-    position:relative;
-    overflow:hidden;
-}
- 
-.ph img {
-    width:100%;
-    display:block;
-}
-
-/* header */
+/* container */
 section {
     width:{text:post width};
     margin:0px auto {text:margin} auto;
@@ -286,6 +273,7 @@ section {
     margin:{text:margin} auto;
 }
 
+/* header */
 header {
     {block:ifNotSidebar}
     position:relative;
@@ -333,6 +321,16 @@ nav span {
 }
 
 /* posts */
+.ph {
+    position:relative;
+    overflow:hidden;
+}
+ 
+.ph img {
+    width:100%;
+    display:block;
+}
+
 .title { font-size:1.1em; }
 .title, .title a { 
     font-weight:bold;
@@ -547,6 +545,7 @@ a.more_notes_link:hover { color:{color:title}; }
     margin-right:10px;
 }
 
+/* pagination */
 footer {
     display:flex;
     align-items:center;
@@ -595,7 +594,7 @@ footer a {
     .tmblr-iframe--app-cta-button {display: none!important;}
 }
 
-/* Credit */
+/* credit */
 .credit .oi, .top .oi { font-size:20px; margin:0; color:{color:text}; }
 
 .credit { 
