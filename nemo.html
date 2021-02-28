@@ -17,36 +17,42 @@
     
 -------------------------------------------------------->
 
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="{Favicon}">
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
 <title>{title} {block:TagPage}/ #{Tag}{/block:TagPage}{block:DayPage}/ @ {ShortMonth} {DayOfMonth}, {Year}{/block:DayPage} {block:PostSummary}/ {PostSummary}{/block:PostSummary}</title>
 {block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
 
+<meta name="image:Icon" content=""/>
+
 <meta name="color:Background" content="#FFFFFF" />
-<meta name="color:Title" content="#000000" />
+<meta name="color:Title" content="#FB8C98" />
 <meta name="color:Text" content="#000000" />
 <meta name="color:Links" content="#7B7B7B" />
-<meta name="color:Accent" content="#F7CACA" />
-<meta name="color:Posts" content="#F5F5F5" />
-<meta name="color:Posts Text" content="#000000" />
+<meta name="color:Accent" content="#FB8C98" />
+<meta name="color:Posts" content="#000000" />
+<meta name="color:Posts Text" content="#E7E7E7" />
 <meta name="color:Borders" content="#EEEEEE" />
+
+<meta name="select:Icon Shape" content="0px" title="square" />
+<meta name="select:Icon Shape" content="5px" title="rounded" />
+<meta name="select:Icon Shape" content="50%" title="circle" />
 
 <meta name="if:Sidebar" content="" />
 <meta name="if:Hide Caption Icons" content="" />
+<meta name="if:Rounded Posts" content="" />
 
 <meta name="text:Title" content="" />
 <meta name="text:Description" content="" />
 
-<meta name="text:Google Font" content="Lato" />
+<meta name="text:Google Font" content="Karla" />
 
 <meta name="text:Font Size" content="13px" />
 <meta name="text:Post Width" content="540px" />
 <meta name="text:Sidebar Width" content="200px" />
 <meta name="text:Sidebar Margin" content="150px" />
-<meta name="text:Margin" content="200px" />
-<meta name="text:Photoset Gutter" content="2px" />
+<meta name="text:Margin" content="150px" />
+<meta name="text:Photoset Gutter" content="1px" />
 
 <meta name="text:Home Link" content="home" />
 <meta name="text:Ask Link" content="contact" />
@@ -164,6 +170,10 @@ $(document).ready(function(){
     --NPF-Image-Spacing:{text:photoset gutter};
     --NPF-Bottom-Gap-From-Captions:1em;
 }
+
+::marker {
+    color:{color:accent};
+}
  
 /*selection*/
 ::-webkit-selection { background:{color:accent}4D; }
@@ -204,7 +214,7 @@ $(document).ready(function(){
 
 /* basic styles */
 body {
-    font-family:'{text:google font}';
+    font-family:'{text:google font}', sans-serif;
     font-size:{text:font size};
     line-height:2.5em;
     letter-spacing:0.5px;
@@ -274,26 +284,43 @@ section {
 
 /* header */
 header {
+    display: flex;
+    flex-direction:column;
     {block:ifNotSidebar}
     position:relative;
+    align-items:center;
     width:{text:post width};
     margin-top:{text:margin};
-    text-align:center;
     {/block:ifNotSidebar}
     {block:ifSidebar}
+    align-items:flex-end;
     position:fixed;
     width:{text:sidebar width};
-    margin-top:-1em;
     margin-left:calc(-{text:sidebar margin} + -{text:sidebar width});
     text-align:right;
     {/block:ifSidebar}
+}
+
+.icon {
+    display:block;
+    position:relative;
+    width:40px;
+    height:40px;
+    margin-bottom:20px;
+}
+
+.icon img {
+    width:40px;
+    height:40px;
+    border-radius:{select:icon shape};
+    object-fit:cover;
 }
 
 #blogtitle { 
     display:inline-block;
     font-weight:bold;
     font-size:1.2em;
-    line-height:calc({text:font size} * 2)px;
+    line-height:calc({text:font size} * 2);
     text-transform:lowercase;
     margin-bottom:20px;
     color:{color:title};
@@ -328,6 +355,9 @@ nav span {
 .ph img {
     width:100%;
     display:block;
+    {block:ifRoundedPosts}
+    border-radius:5px;
+    {/block:ifRoundedPosts}
 }
 
 .title { font-size:1.1em; }
@@ -346,6 +376,17 @@ nav span {
 [photoset-layout] div {
   cursor:help;
 }
+
+{block:ifRoundedPosts}
+[photoset-layout] img {
+    border-radius:0;
+}
+
+div[photoset-layout] {
+    border-radius:5px;
+    overflow:hidden;
+}
+{/block:ifRoundedPosts}
 
 /* audio */
 .spotify_audio_player {
@@ -376,6 +417,9 @@ nav span {
     display:block;
     min-height:24px;
     padding:20px;
+    {block:ifRoundedPosts}
+    border-radius:5px;
+    {/block:ifRoundedPosts}
 }
  
 .audio_info {
@@ -396,12 +440,21 @@ nav span {
     display:block;
 }
 
+/* video */
+.tmblr-full > video {
+    {block:ifRoundedPosts}
+    border-radius:5px;
+    {/block:ifRoundedPosts}
+}
+
 /* quotes */
 .quote {
     font-size:1.2em;
     font-weight:bold;
     position:relative;
+    {block:ifRoundedPosts}
     border-radius:5px;
+    {/block:ifRoundedPosts}
 }
 
 .source {
@@ -429,6 +482,9 @@ nav span {
 .line:nth-child(odd) { 
     background:{color:posts};
     color:{color:posts text};
+    {block:ifRoundedPosts}
+    border-radius:5px;
+    {/block:ifRoundedPosts}
 }
 
 /* asks */
@@ -446,7 +502,7 @@ nav span {
     {/block:ifHideCaptionIcons}
     vertical-align:middle;
     margin-right:8px;
-    border-radius:50%;
+    border-radius:{select:icon shape};
     width:20px;
     height:20px;
 }
@@ -573,7 +629,7 @@ footer a {
         width:{text:post width};
         margin-top:{text:margin};
         margin-left:0;
-        text-align:center;
+        align-items:center;
     }
     
     nav span {
@@ -594,27 +650,16 @@ footer a {
 }
 
 /* credit */
-.credit .oi, .top .oi { font-size:20px; margin:0; color:{color:text}; }
+.credit .oi,.top .oi { font-size:20px; margin:0; }
+.top { left:15px; bottom:15px; }
+.credit { bottom:15px; right:15px; }
 
-.credit { 
+.top, .credit { 
     position:fixed; 
-    bottom:15px; 
-    right:15px; 
     line-height:1em; 
     padding:6px 5px 4px; 
-    background:{color:background}; 
-    border-radius:5px;
-}
-
-.top {
-    position:fixed;
-	left:15px;
-	bottom:15px;
-	display:none;
-	line-height:1em;
-	padding:6px 5px 4px; 
-    background:{color:background}; 
-    border-radius:5px;
+    background-color:{color:background};
+    border-radius:3px;
 }
 
 </style>
@@ -624,6 +669,9 @@ footer a {
 <section id="entries">
 
 <header>
+    {block:ifIconImage}
+    <div class="icon"><img src="{image:Icon}"></div>
+    {/block:ifIconImage}
     {block:ifTitle}
     <div id="blogtitle"><a href="/">{text:Title}</a></div>
     {/block:ifTitle}
@@ -631,9 +679,9 @@ footer a {
     <div id="description">{text:Description}</div>
     {/block:ifDescription}
     <nav>
-    <span><a href="/">{text:home link}</a></span>
-    <span><a href="/ask">{text:ask link}</a></span>
-    <span><a href="/archive">{text:archive link}</a></span>
+    {block:ifHomeLink}<span><a href="/">{text:home link}</a></span>{/block:ifHomeLink}
+    {block:ifAskLink}<span><a href="/ask">{text:ask link}</a></span>{/block:ifAskLink}
+    {block:ifArchiveLink}<span><a href="/archive">{text:archive link}</a></span>{/block:ifArchiveLink}
     {block:HasPages}{block:Pages}<span><a href="{URL}">{Label}</a></span>{/block:Pages}{/block:HasPages}
     {block:ifLink1}<span><a href="{text:Link 1 URL}">{text:Link 1}</a></span>{/block:ifLink1}
     {block:ifLink2}<span><a href="{text:Link 2 URL}">{text:Link 2}</a></span>{/block:ifLink2}
@@ -779,7 +827,7 @@ footer a {
 {block:Date}
 <div class="post-info">
     {block:PinnedPostLabel}
-    <div class="date"><a href="{Permalink}" title="pinned post">pinned post</a></div>
+    <div class="date"><a href="{Permalink}" title="view post">pinned post</a></div>
     {/block:PinnedPostLabel}
     {block:NoteCount}
     <div class="date"><a href="{Permalink}" class="notecount">{NoteCount} notes</a></div>
