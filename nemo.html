@@ -493,6 +493,36 @@ div[photoset-layout] {
     border:0!important;
 }
 
+/* links */
+.link {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:{color:posts text};
+    background:{color:posts};
+    padding:10px 20px;
+    -webkit-transition: all 0.25s ease-in-out;
+       -moz-transition: all 0.25s ease-in-out;
+         -o-transition: all 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
+}
+
+.link a {
+    color:{color:posts text};
+}
+
+.link a:hover {
+    color:{color:accent};
+}
+
+.link:hover {
+    padding-right:40px;
+    -webkit-transition: all 0.25s ease-in-out;
+       -moz-transition: all 0.25s ease-in-out;
+         -o-transition: all 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
+}
+
 /* captions */
 .caption { list-style-type:none;margin:20px 0 0; }
 .comment a { border-bottom:1px solid {color:accent}; }
@@ -629,6 +659,7 @@ footer a {
         width:{text:post width};
         margin-top:{text:margin};
         margin-left:0;
+        text-align:center;
         align-items:center;
     }
     
@@ -723,7 +754,11 @@ footer a {
 {/block:NotReblog}
 {/block:Text}
 
-{block:Link}<div class="title"><a href="{URL}">{name}</a></div>
+{block:Link}
+<a class="link" href="{URL}">
+    <span>{name}</span>
+    <span><i class="oi oi-chevron-right"></i></span>
+</a>
 {block:Description}
     {block:NotReblog}
         <li class="caption">
