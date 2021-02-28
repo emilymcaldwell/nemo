@@ -30,8 +30,8 @@
 <meta name="color:Text" content="#000000" />
 <meta name="color:Links" content="#7B7B7B" />
 <meta name="color:Accent" content="#FB8C98" />
-<meta name="color:Posts" content="#000000" />
-<meta name="color:Posts Text" content="#E7E7E7" />
+<meta name="color:Posts" content="#F4F5F5" />
+<meta name="color:Posts Text" content="#000000" />
 <meta name="color:Borders" content="#EEEEEE" />
 
 <meta name="select:Icon Shape" content="0px" title="square" />
@@ -197,19 +197,15 @@ $(document).ready(function(){
 /* tooltips */
 #s-m-t-tooltip{
     position:absolute;
-    margin:13px;
-    max-width:250px;
+    margin:1.4em;
     text-transform:uppercase;
-    line-height:.7em;
-    z-index:999;
-    padding:10px;
+    padding:1.1em;
     border-radius:3px;
     background:{color:accent};
-    color:{color:background}E6;
-    font-weight:700;
-    letter-spacing:1px;
-    font-size:.7em;
-    font-family:'Karla', sans-serif;
+    color:{color:background};
+    letter-spacing:0.1em;
+    font:0.75em/0.75em karla, sans-serif;
+    font-weight:600;
 }
 
 /* basic styles */
@@ -324,6 +320,9 @@ header {
     text-transform:lowercase;
     margin-bottom:20px;
     color:{color:title};
+    {block:ifIconImage}
+    margin-top:5px;
+    {/block:ifIconImage}
 }
 
 #blogtitle a { color:{color:title}; }
@@ -349,7 +348,6 @@ nav span {
 /* posts */
 .ph {
     position:relative;
-    overflow:hidden;
 }
  
 .ph img {
@@ -363,8 +361,6 @@ nav span {
 .title { font-size:1.1em; }
 .title, .title a { 
     font-weight:bold;
-    text-transform:lowercase;
-    margin-bottom:-20px;
     color:{color:title};
 }
 
@@ -501,6 +497,9 @@ div[photoset-layout] {
     color:{color:posts text};
     background:{color:posts};
     padding:10px 20px;
+    {block:ifRoundedPosts}
+    border-radius:5px;
+    {/block:ifRoundedPosts}
     -webkit-transition: all 0.25s ease-in-out;
        -moz-transition: all 0.25s ease-in-out;
          -o-transition: all 0.25s ease-in-out;
@@ -761,9 +760,9 @@ footer a {
 </a>
 {block:Description}
     {block:NotReblog}
-        <li class="caption">
+        <div class="caption">
             <div class="comment">{description}</div>
-        </li>
+        </div>
     {/block:NotReblog}
 {/block:Description}
 {block:RebloggedFrom}
@@ -801,6 +800,8 @@ footer a {
 
 {block:Video}{video-400}{/block:Video}
 
+</div>
+
 {block:Audio}
     {block:audioplayer}
         <div class="hold">
@@ -813,8 +814,6 @@ footer a {
     {/block:AudioPlayer}
     <p>
 {/block:Audio}
-
-</div>
 
 {block:caption}
     {block:Reblogs}
