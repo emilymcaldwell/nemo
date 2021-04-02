@@ -343,7 +343,7 @@ nav span {
 .video, .video iframe,
 figure.tmblr-embed.tmblr-full,
 figure.tmblr-embed.tmblr-full iframe  {
-    max-width:100%;
+    width:100%;
     display:block;
     {block:ifRoundedPosts}
     border-radius:5px;
@@ -450,7 +450,6 @@ div[photoset-layout] {
 /* ASK */
 
 .sender, .sender a {
-    display:inline-block;
     text-transform:lowercase;
     border:0!important;
 }
@@ -753,12 +752,12 @@ footer .oi {
 
 {block:Answer}
 <div class="question">
-    <span class="sender"><a>{asker}</a></span> sent:
-    {question}
+    <div class="sender"><a>{asker}</a> sent:</div>
+    <p>{question}</p>
 </div>
 {block:Answerer}
     <div class="comment">
-        <div class="sender">{answerer}</div> replied:
+        <div class="sender">{answerer} replied:</div>
         {answer}
     </div>
 {/block:Answerer}
