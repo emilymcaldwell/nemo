@@ -449,10 +449,40 @@ div[photoset-layout] {
 
 /* ASK */
 
-.sender, .sender a {
+.asker, .asker a {
+    line-height:1em;
+    font-weight:bold;
+    color:{color:text};
     text-transform:lowercase;
     border:0!important;
+    margin:0;
 }
+
+.asker a:hover { color:{color:accent}; }
+
+.question { 
+    position:relative;
+    color:{color:background};
+    background:{color:accent};
+    padding:1em 1.5em;
+    margin:1em 0 2em;
+    border-radius:5px;
+}
+
+.question:after {
+    display:block;
+    content:'';
+    position:absolute;
+    top:-10px;
+    left:15px;
+    width:0;
+    border-width:0px 10px 10px;
+    border-style:solid;
+    border-color:{color:accent} transparent;
+}
+
+.question p:first-of-type {margin-top: 0;}
+.question p:last-of-type {margin-bottom: 0;}
 
 /* CAPTION */
 
@@ -751,28 +781,26 @@ footer .oi {
 {/block:caption}
 
 {block:Answer}
-<div class="question">
-    <div class="sender"><a>{asker}</a> sent:</div>
-    <p>{question}</p>
+<div class="q">
+    <span class="asker"><a>{asker}</a></span>
+    <div class="question">{question}</div>
 </div>
 {block:Answerer}
     <div class="comment">
-        <div class="sender">{answerer} replied:</div>
+        <div class="asker">{answerer}</div>
         {answer}
     </div>
 {/block:Answerer}
 {block:NotReblog}
     <div class="comment">
-        <a class="sender" href="{Permalink}">{Name}</a> replied:
         {replies}
     </div>
 {/block:NotReblog}
 {block:RebloggedFrom}
     {block:Reblogs}
         <div class="comment">
-        <img src="{PortraitURL-64}" class="user-icon">
-            <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="sender" target="_blank">{username}</a>
-            <div class="tex">{body}</div>
+            <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="asker" target="_blank">{username}</a>
+            {body}
         </div>
     {/block:Reblogs}
 {/block:RebloggedFrom}
