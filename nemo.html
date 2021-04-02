@@ -527,7 +527,11 @@ a.more_notes_link:hover { color:{color:accent}; }
 
 /* PAGINATION  */
 
-footer { display:block; margin:{text:margin} 0; text-align:center; }
+footer { display:flex; align-items:center; justify-content:space-between; margin:{text:margin} 0; }
+
+footer .oi {
+    font-size:1.5em;
+}
 
 /* CUSTOM CSS */
 
@@ -540,8 +544,6 @@ footer { display:block; margin:{text:margin} 0; text-align:center; }
         width:{text:post width};
         margin:{text:margin} auto;
     }
-    
-    footer {display:block;}
     
     header {
         position:relative;
@@ -792,13 +794,17 @@ footer { display:block; margin:{text:margin} 0; text-align:center; }
 
 {/block:Posts}
 
-<footer>
 {block:Pagination}
-<span>page {CurrentPage}</span><br>
-{block:PreviousPage}<a href="{PreviousPage}">back</a> / {block:nextpage}{/block:nextpage}{/block:PreviousPage}
-{block:NextPage}<a href="{NextPage}">next</a>{/block:NextPage}
-{/block:Pagination}
+<footer>
+{block:PreviousPage}
+    <span><a href="{PreviousPage}"><i class="oi oi-chevron-left"></i></a></span>
+{/block:PreviousPage}
+    <span>{CurrentPage} / {TotalPages}</span>
+{block:NextPage}
+    <span><a href="{NextPage}"><i class="oi oi-chevron-right"></i></a></span>
+{/block:NextPage}
 </footer>
+{/block:Pagination}
 
 </section>
 
