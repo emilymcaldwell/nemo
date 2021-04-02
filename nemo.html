@@ -312,6 +312,8 @@ header {
 #blogtitle a:hover { color:{color:text}; }
  
 #description { margin:0 0 1.5em; }
+#description a { color:{color:accent}; }
+#description a:hover { color:{color:text}; }
 
 nav a {
     display:inline-block;
@@ -329,7 +331,7 @@ nav span {
 
 /* TEXT */
 
-.title { font-size:1.1em; font-weight:bold; }
+.title { font-size:1.1em; line-height:1em; font-weight:bold; }
 .title, .title a { 
     color:{color:text};
 }
@@ -386,13 +388,15 @@ div[photoset-layout] {
 .player {
     display:inline-block;
     width:27px;
-    vertical-align:middle;
-    padding-right:1.2em;
+    padding-right:20px;
 }
 
 .player-wrap {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
     background:{color:accent};
-    padding:1.2em;
+    padding:15px;
     {block:ifRoundedPosts}
     border-radius:5px;
     {/block:ifRoundedPosts}
@@ -401,8 +405,16 @@ div[photoset-layout] {
 .audio-info {
     display:inline-block;
     color:{color:background};
-    line-height:1.4em;
+    margin-right:5px;
+    width:fit-content;
+    text-align:right;
+    line-height:1.75em;
+}
+
+.track .oi, .artist .oi {
     vertical-align:middle;
+    font-size:1.25em;
+    margin-left:0.75em;
 }
 
 /* VIDEO */
@@ -512,18 +524,21 @@ a.user:hover { color:{color:accent}; }
 
 /* notes */
 ol.notes { padding:0; display:block; }
-.notes img { display:none; }
-li.note { display:block; margin:0 0 0.5em 20px; width:100%; }
-li.note blockquote { padding:0 0 0 1em; margin:0 0 0.5em 1em; }
-a.more_notes_link,.notes_loading { color:{color:text}; text-transform:lowercase; font-weight:bold; }
+.notes img, .notes-source img { display:inline-block; vertical-align:middle; width:20px; border-radius:50%; margin-right:1em; }
+li.note { display:block; margin:0 0 0 20px; padding:1em 0; border-top:1px solid {color:borders}; width:100%; }
+.notes-source { padding:1em 0; border-bottom:1px solid {color:borders}; }
+.notes-date { padding-top:1em; }
+.notes-date:before { content:''; background:{color:accent}; display:inline-block; vertical-align:middle; width:20px; height:20px; border-radius:50%; margin-right:1em; }
+li.note blockquote { padding:0 0 0 1em; margin:0.5em 0 0.5em 0.5em; }
+a.more_notes_link,.notes_loading { color:{color:text}; text-transform:lowercase; font-weight:bold; text-align:left!important; }
 a.more_notes_link:hover { color:{color:accent}; }
 .more_notes_link,.notes_loading {
     display:inline-block;
     width:inherit;
+    margin-top:0em;
 }
 
-.pagenotes { display:block; }
-.pagenotes a { margin:0; }
+.more_notes_link:before,.notes_loading:before { content:''; background:{color:accent}; display:inline-block; vertical-align:middle; width:20px; height:20px; border-radius:50%; margin-right:1em; }
 
 /* PAGINATION  */
 
@@ -564,8 +579,15 @@ footer .oi {
         margin:100px auto;
     }
     
-    iframe.tumblr_audio_player, .video, .tmblr-full > video {
+    .video, .tmblr-full > video {
         width:80vw;
+    }
+    
+    .audio-info {
+        width:calc(80vw - 80px);
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
     }
 
     .iframe-controls--phone-mobile {display: none!important;}
@@ -707,8 +729,8 @@ footer .oi {
             {/block:AudioPlayer}
         </div>
         <div class="audio-info">
-            <div class="track">{block:TrackName}<strong>{TrackName}</strong>{/block:TrackName}</div>
-            <div class="artist">{block:Artist}{Artist}{/block:Artist}</div>
+            <div class="track">{block:TrackName}<strong>{TrackName}</strong><i class="oi oi-playlist"></i>{/block:TrackName}</div>
+            <div class="artist">{block:Artist}{Artist}<i class="oi oi-disc"></i>{/block:Artist}</div>
         </div>
     </div>
 </div>
@@ -780,14 +802,17 @@ footer .oi {
 <article class="posts">
     <div class="pagenotes">
         {block:NotReblog}
-        original post:&nbsp;<a href="{ReblogParentURL}">{Name}</a>
-        {/block:NotReblog}
-        {block:RebloggedFrom}
-        via:&nbsp;<a href="{ReblogParentURL}">{ReblogParentName}</a>
-        {block:ContentSource}<br>source:&nbsp;<a href="{ReblogRootURL}">{ReblogRootName}</a>{/block:ContentSource}
+        <div class="notes-source"><img src="{PortraitURL-24}">original post by <a href="{ReblogParentURL}">{Name}</a></div>
+    {/block:NotReblog}
+    {block:RebloggedFrom}
+        <div class="notes-source"><img src="{ReblogParentPortraitURL-24}">reblogged from <a href="{ReblogParentURL}">{ReblogParentName}</a></div>
+        {block:ContentSource}
+        <div class="notes-source"><img src="{ReblogRootPortraitURL-24}">originally by <a href="{ReblogRootURL}">{ReblogRootName}</a></div>
+        {/block:ContentSource}
     {/block:RebloggedFrom}
     </div> 
-    <hr>
+    <div class="notes-date">posted at <a href="{Permalink}">{12HourWithZero}:{Minutes}:{Seconds} {CapitalAmPm}</a> on <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonthWithZero}{DayOfMonthSuffix} {Year}</a>
+    </div>
     {PostNotes}
 </article>
 {/block:PostNotes}
@@ -839,6 +864,6 @@ $(document).ready(function() {
 
 <a href="#" title="back to top" class="top"><i class="oi oi-arrow-up"></i></a>
 
-<div class="credit"><a href="https://wordbite.tumblr.com" title="nemo @ wordbite"><i class="oi oi-smile"></i></a></div>
+<div class="credit"><a href="https://wordbite.tumblr.com" title="wordbite"><i class="oi oi-smile"></i></a></div>
 
 </html>
