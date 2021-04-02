@@ -450,8 +450,8 @@ div[photoset-layout] {
 /* ASK */
 
 .sender, .sender a {
+    display:inline-block;
     text-transform:lowercase;
-    text-decoration:underline;
     border:0!important;
 }
 
@@ -811,7 +811,7 @@ footer .oi {
         {/block:ContentSource}
     {/block:RebloggedFrom}
     </div> 
-    <div class="notes-date">posted at <a href="{Permalink}">{12HourWithZero}:{Minutes}:{Seconds} {CapitalAmPm}</a> on <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonthWithZero}{DayOfMonthSuffix} {Year}</a>
+    <div class="notes-date">posted at <a href="{Permalink}">{12Hour}:{Minutes}:{Seconds} {CapitalAmPm}</a> on <a href="{Permalink}">{ShortDayOfWeek}, {ShortMonth}. {DayOfMonthWithZero}{DayOfMonthSuffix} {Year}</a>
     </div>
     {PostNotes}
 </article>
